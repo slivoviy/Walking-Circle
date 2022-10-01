@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
                 Destroy(other.gameObject);
                 break;
             case "Spike":
+                Destroy(gameObject);
                 UIManager.Singleton.GameOver(false);
                 break;
         }
