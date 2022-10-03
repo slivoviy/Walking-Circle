@@ -2,20 +2,34 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour {
-    public static UIManager Singleton;
+public class GameManager : MonoBehaviour {
+    public static GameManager Singleton;
     public bool gameOver;
-
+    
+    [SerializeField] private int coinsAmount;
     [SerializeField] private TextMeshProUGUI coinsText;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TextMeshProUGUI gameOverText;
 
+    private int coinsCollected;
+
     private void Awake() {
         Singleton = this;
     }
-
-    public void AddCoin(int coins) {
+    
+    private void UpdateCoins(int coins) {
         coinsText.text = coins.ToString();
+    }
+    
+    public void AddCoin() {
+        ++coinsCollected;
+        if (coinsCollected == coinsAmount) {
+            UpdateCoins(coinsCollected);
+            GameOver(true);
+        }
+        else {
+            UpdateCoins(coinsCollected);
+        }
     }
 
     public void GameOver(bool gameWon) {

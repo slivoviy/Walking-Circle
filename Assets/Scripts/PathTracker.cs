@@ -16,7 +16,15 @@ public class PathTracker : MonoBehaviour {
     }
 
     private void Update() {
-        if (UIManager.Singleton.gameOver) return;
+        if (GameManager.Singleton.gameOver) {
+            for (var i = 0; i < points.Count; ++i) {
+                var point = points[0];
+                points.Remove(point);
+                Destroy(point.gameObject);
+            }
+            lr.positionCount = 0;
+            return;
+        }
         
         if (Input.touchCount == 0) {
             touched = false;
